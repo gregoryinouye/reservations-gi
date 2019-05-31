@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 
 // change user: 'root' and password: 'password' with your credentials
 const sequelize = new Sequelize('reservations', 'root', 'password', {
-  host: 'localhost',
+  // host: '172.17.0.2',
+  host: 'db',
   dialect: 'mysql',
   logging: false,
 });
