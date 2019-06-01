@@ -6,7 +6,7 @@
   "scripts": {
     "build-dev": "webpack -d -w",
     "start-dev": "nodemon server/connection.js",
-    "build": "webpack -d",
+    "build": "webpack -p",
     "start": "node server/connection.js",
     "seed": "node db/seed.js",
     "test": "jest",
