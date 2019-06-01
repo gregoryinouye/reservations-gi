@@ -212,7 +212,7 @@ class Reservations extends React.Component {
     let parseId = this.props.urlId.split('/');
     const id = parseId[parseId.length - 1];
 
-    axios.get(`http://54.173.109.76:80/${id}/reservations`)
+    axios.get(`http://54.173.109.76/${id}/reservations`)
       .then((res) => {
         this.setState({
           bookings: res.data.booked,
