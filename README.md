@@ -1,4 +1,4 @@
-# freeSeats
+# nullTable
 
 > A user can search for a restaurant based on location, cuisine, or restaurant’s name and visit the restaurant’s page to get an overview of what the restaurant has to offer like photos of their dishes, their menu options, customers’ reviews, and be able to make a reservation.
 
@@ -45,4 +45,79 @@ npm install
 npm run build
 npm start
 ```
-- In a broswer, go to: localhost:3020
+- Point browser to: localhost:3020
+
+## CRUD API
+
+- GET (/:id/reservations)
+
+  Gets all reservations for the restaurant with specified id.
+
+  ```javascript
+  [
+    {
+      id: 6,
+      username: 'btrent',
+      time: '6:00 PM',
+      numSeats: 3,
+    },
+    {
+      id: 7,
+      username: 'jmayo',
+      time: '6:15 PM',
+      numSeats: 4,
+    }
+  ]
+  ```
+
+- POST (/:id/reservations)
+  
+  Creates a new reservation for the restaurant with given id. The request must be sent with username, time, numSeats in req.body.
+
+  ```javascript
+  {
+    username: 'jdoe',
+    time: '6:30 PM',
+    numSeats: 3,
+  }
+  ```
+
+  When the creation is successful, the HTTP response is a 201 Created and the response contains the reservation id for the new reservation:
+
+  ```javascript
+  { reservationId: 2 }
+  ```
+
+- PUT (/:id/reservations/:reservationId)
+  
+  Updates the reservation with specified reservationId. The request must be sent with id, time, seat number in req.body.
+
+  ```javascript
+  {
+    id: 1,
+    user: 2,
+    time: '7:00 PM',
+    numSeats: 4,
+  }
+  ```
+  
+  When the update is successful, the HTTP response is a 200 OK and the header contains the updated reservation information.
+
+    ```javascript
+  {
+    id: 29,
+    username: 'vtran',
+    time: '7:30 PM',
+    numSeats: 3,
+  }
+  ```
+
+- DELETE (/:id/reservations/:reservationId)
+  
+  Deletes a reservation with specified reservationId at restaurant with specified id.
+
+  When the delete is successful, the HTTP response is a 200 OK and the header contains the deleted reservation information.
+
+  ```javascript
+  { reservationId: 47 }
+  ```
