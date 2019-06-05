@@ -90,12 +90,12 @@ npm start
 
 - PUT (/:id/reservations/:reservationId)
   
-  Updates the reservation with specified reservationId. The request must be sent with id, time, seat number in req.body.
+  Updates the reservation with specified reservationId. The request must be sent with id, username, time, and seat number in req.body.
 
   ```javascript
   {
     id: 1,
-    user: 2,
+    username: 'vkim',
     time: '7:00 PM',
     numSeats: 4,
   }
@@ -106,7 +106,7 @@ npm start
     ```javascript
   {
     id: 29,
-    username: 'vtran',
+    username: 'vkim',
     time: '7:30 PM',
     numSeats: 3,
   }
