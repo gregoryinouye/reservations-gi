@@ -57,13 +57,17 @@ npm start
   [
     {
       id: 6,
-      username: 'btrent',
+      reservationId: 10,
+      userId: 55,
+      date: '2019-06-10',
       time: '6:00 PM',
       numSeats: 3,
     },
     {
-      id: 7,
-      username: 'jmayo',
+      id: 6,
+      reservationId: 11,
+      userId: 87,
+      date: '2019-06-10',
       time: '6:15 PM',
       numSeats: 4,
     }
@@ -72,11 +76,14 @@ npm start
 
 - POST (/:id/reservations)
   
-  Creates a new reservation for the restaurant with given id. The request must be sent with username, time, numSeats in req.body.
+  Creates a new reservation for the restaurant with given id. The request must be sent with userId, date, time, and numSeats in req.body.
 
   ```javascript
   {
-    username: 'jdoe',
+    id: 1209,
+    reservationId: 15,
+    userId: 82,
+    date: '2019-06-30',
     time: '6:30 PM',
     numSeats: 3,
   }
@@ -90,12 +97,14 @@ npm start
 
 - PUT (/:id/reservations/:reservationId)
   
-  Updates the reservation with specified reservationId. The request must be sent with id, username, time, and seat number in req.body.
+  Updates the reservation with specified reservationId. The request must be sent with id, userId, date, time, and seat number in req.body.
 
   ```javascript
   {
-    id: 1,
-    username: 'vkim',
+    id: 29,
+    reservationId: 13,
+    userId: 55,
+    date: '2019-06-11',
     time: '7:00 PM',
     numSeats: 4,
   }
@@ -103,11 +112,12 @@ npm start
   
   When the update is successful, the HTTP response is a 200 OK and the header contains the updated reservation information.
 
-    ```javascript
+  ```javascript
   {
     id: 29,
-    username: 'vkim',
-    time: '7:30 PM',
+    userId: 55,
+    date: '2019-06-11',
+    time: '7:00 PM',
     numSeats: 3,
   }
   ```
