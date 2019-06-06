@@ -1,12 +1,13 @@
 const fs = require('fs');
+const faker = require('faker');
 
 const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 const reservationTimes = [ '6:00 PM', '6:15 PM', '6:30 PM', '6:45 PM', '7:00 PM',
   '7:15 PM', '7:30 PM', '7:45 PM', '8:00 PM', '8:15 PM', '8:30 PM', '8:45 PM', '9:00 PM'
 ];
-const writeStream = fs.createWriteStream('data.csv', {flags: 'a'});
 
-async function generateData() {
+async function generateReservationData() {
+  const writeStream = fs.createWriteStream('data.csv', {flags: 'a'});
   const start = new Date();
   let reservationId = 0;
   writeStream.write('id,restaurantId,userId,date,time,numSeats,createdOn\n');
@@ -21,11 +22,29 @@ async function generateData() {
 
   writeStream.end(() => {
     let end = new Date();
-    console.log(`Data generation completed in ${(end - start)/60000} minutes`)
+    console.log(`Reservation data generation completed in ${(end - start)/60000} minutes`)
   });
 };
 
-generateData();
+// generateReservationData();
+
+const writeUserStream = fs.createWriteStream('userData.csv', {flags: 'a'});
+async function generateUserData() {
+  const start = new Date();
+  writeUserStream.write('id,username,firstname,lastname,email\n');
+  for (let i = 0; i < 10000; i += 1) {
+    if (!writeUserStream.write(`${i},${faker.internet.userName()},${faker.name.firstName()},${faker.name.lastName()},${faker.internet.email()}\n`)) {
+      await new Promise(resolve => writeUserStream.once('drain', resolve));
+    }
+  }
+
+  writeUserStream.end(() => {
+    let end = new Date();
+    console.log(`User data generation completed in ${(end - start)/60000} minutes`)
+  });
+};
+
+generateUserData();
 
 // GENERATE DATA WITH CALLBACKS VERSION
 
