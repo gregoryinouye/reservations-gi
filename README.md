@@ -13,8 +13,8 @@
 ## Table of Contents
 
 1. [Requirements](#requirements)
-1. [Development](#development)
-1. [Usage](#Usage)
+2. [Development](#development)
+3. [Usage](#Usage)
 
 ## Requirements
 
@@ -46,6 +46,10 @@ npm run build
 npm start
 ```
 - Point browser to: localhost:3020
+
+## Style Guide
+
+Refer to the [AirBnb Style Guide](https://github.com/airbnb/javascript).
 
 ## CRUD API
 
