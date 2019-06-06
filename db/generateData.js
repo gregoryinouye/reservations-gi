@@ -8,11 +8,12 @@ const writeStream = fs.createWriteStream('data.csv', {flags: 'a'});
 
 async function generateData() {
   const start = new Date();
-  writeStream.write('id,reservationId,userId,date,time,numSeats\n');
+  let reservationId = 0;
+  writeStream.write('id,restaurantId,userId,date,time,numSeats,createdOn\n');
   for (let i = 0; i < 10000000; i += 1) {
     let count = randomNum(10, 15);
     for (let j = 0; j < count; j += 1) {
-      if (!writeStream.write(`${i},${j},${randomNum(1, 1000)},${'2019-06-' + ('' + randomNum(4, 30)).padStart(2, '0')},${reservationTimes[randomNum(0, 12)]},${randomNum(1, 6)}\n`)) {
+      if (!writeStream.write(`${reservationId},${i},${randomNum(1, 1000)},${'2019-06-' + ('' + randomNum(4, 30)).padStart(2, '0')},${reservationTimes[randomNum(0, 12)]},${randomNum(1, 6)},${'2019-06-' + ['04', '05', '06'][randomNum(0, 2)]}\n`)) {
         await new Promise(resolve => writeStream.once('drain', resolve));
       }
     }
