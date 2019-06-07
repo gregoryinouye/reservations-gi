@@ -2,15 +2,6 @@
 -- POSTGRES SCHEMA --
 ---------------------
 
-DROP TABLE IF EXISTS restaurants;
-		
-CREATE TABLE restaurants (
-  id            SERIAL PRIMARY KEY,
-  name          INTEGER NOT NULL,
-  capacity      INTEGER NOT NULL
-);
-
-
 DROP TABLE IF EXISTS reservations;
 		
 CREATE TABLE reservations (
@@ -21,6 +12,15 @@ CREATE TABLE reservations (
   time          VARCHAR NULL DEFAULT NULL,
   partySize     INTEGER NULL DEFAULT NULL,
   createdOn     VARCHAR NULL DEFAULT NULL
+);
+
+
+DROP TABLE IF EXISTS restaurants;
+		
+CREATE TABLE restaurants (
+  id            SERIAL PRIMARY KEY,
+  name          VARCHAR NOT NULL,
+  capacity      INTEGER NULL
 );
 
 

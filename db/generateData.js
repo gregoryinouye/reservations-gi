@@ -9,11 +9,12 @@ const reservationTimes = [ '6:00 PM', '6:15 PM', '6:30 PM', '6:45 PM', '7:00 PM'
 async function generateReservationData() {
   const writeStream = fs.createWriteStream('data.csv', {flags: 'a'});
   const start = new Date();
-  let reservationId = 0;
+  let reservationId = -1;
   writeStream.write('id,restaurantId,userId,date,time,partySize,createdOn\n');
-  for (let i = 0; i < 10000000; i += 1) {
+  for (let i = 0; i < 1000000; i += 1) {
     let count = randomNum(10, 15);
     for (let j = 0; j < count; j += 1) {
+      reservationId += 1;
       if (!writeStream.write(`${reservationId},${i},${randomNum(1, 1000)},${'2019-06-' + ('' + randomNum(4, 30)).padStart(2, '0')},${reservationTimes[randomNum(0, 12)]},${randomNum(1, 6)},${'2019-06-' + ['04', '05', '06'][randomNum(0, 2)]}\n`)) {
         await new Promise(resolve => writeStream.once('drain', resolve));
       }
@@ -26,7 +27,7 @@ async function generateReservationData() {
   });
 };
 
-generateReservationData();
+// generateReservationData();
 
 async function generateUserData() {
   const start = new Date();
@@ -45,6 +46,28 @@ async function generateUserData() {
 };
 
 // generateUserData();
+
+async function generateRestaurantData() {
+  const start = new Date();
+  const names = [];
+  for (let i = 0; i < 1000; i++) {
+    names.push(faker.lorem.word());
+  }
+  const writeRestaurantStream = fs.createWriteStream('restaurantData.csv', {flags: 'a'});
+  writeRestaurantStream.write('id,restaurant,capacity\n');
+  for (let i = 0; i < 10000000; i += 1) {
+    if (!writeRestaurantStream.write(`${i},${names[randomNum(0, 999)]},${randomNum(8, 24)}\n`)) {
+      await new Promise(resolve => writeRestaurantStream.once('drain', resolve));
+    }
+  }
+
+  writeRestaurantStream.end(() => {
+    let end = new Date();
+    console.log(`Restaurant data generation completed in ${(end - start)/60000} minutes`)
+  });
+};
+
+// generateRestaurantData();
 
 // GENERATE DATA WITH CALLBACKS VERSION
 
