@@ -41,6 +41,8 @@ npm run seed
 - ensure Postgres is running
 - psql -d opentable -a -f schema.sql
 
+- copy restaurants(id,name) from 'filepath' delimiter ',' CSV HEADER;
+
 ## Usage
 
 From within the root directory:
