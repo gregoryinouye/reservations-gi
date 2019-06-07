@@ -28,4 +28,5 @@ public/bundle.js
 package-lock.json
 
 # DATA FILES
+data
 *.csv

@@ -25,7 +25,7 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 ## Development
 
-### Seeding Database
+### Seeding Database for FEC
 - Before seeding, make sure to npm install
 - Log into mySQL from terminal: mySQL -u root -p
 - Enter password if set up with one
@@ -36,6 +36,10 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 - Run script:
 npm run seed
 - To check 'reservations' database: select * from restaurants;
+
+### Seeding Database for SDC
+- ensure Postgres is running
+- psql -d opentable -a -f schema.sql
 
 ## Usage
 

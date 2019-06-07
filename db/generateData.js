@@ -10,7 +10,7 @@ async function generateReservationData() {
   const writeStream = fs.createWriteStream('data.csv', {flags: 'a'});
   const start = new Date();
   let reservationId = 0;
-  writeStream.write('id,restaurantId,userId,date,time,numSeats,createdOn\n');
+  writeStream.write('id,restaurantId,userId,date,time,partySize,createdOn\n');
   for (let i = 0; i < 10000000; i += 1) {
     let count = randomNum(10, 15);
     for (let j = 0; j < count; j += 1) {
@@ -26,11 +26,11 @@ async function generateReservationData() {
   });
 };
 
-// generateReservationData();
+generateReservationData();
 
-const writeUserStream = fs.createWriteStream('userData.csv', {flags: 'a'});
 async function generateUserData() {
   const start = new Date();
+  const writeUserStream = fs.createWriteStream('userData.csv', {flags: 'a'});
   writeUserStream.write('id,username,firstname,lastname,email\n');
   for (let i = 0; i < 10000; i += 1) {
     if (!writeUserStream.write(`${i},${faker.internet.userName()},${faker.name.firstName()},${faker.name.lastName()},${faker.internet.email()}\n`)) {
@@ -44,7 +44,7 @@ async function generateUserData() {
   });
 };
 
-generateUserData();
+// generateUserData();
 
 // GENERATE DATA WITH CALLBACKS VERSION
 
