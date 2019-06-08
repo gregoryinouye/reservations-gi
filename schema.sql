@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS restaurants;
 CREATE TABLE restaurants (
   id            SERIAL PRIMARY KEY,
   name          VARCHAR NOT NULL,
-  capacity      INTEGER NULL
+  capacity      INTEGER NOT NULL
 );
 
 
@@ -38,5 +38,5 @@ ALTER TABLE reservations ADD FOREIGN KEY (restaurantId) REFERENCES restaurants (
 ALTER TABLE reservations ADD FOREIGN KEY (userId) REFERENCES users (id);
 
 copy users(id,username,firstname,lastname,email) from '/Users/gregoryinouye/Hack Reactor/reservations-gi/data/users.csv' DELIMITER ',' CSV HEADER;
-copy restaurants(id,name) from '/Users/gregoryinouye/Hack Reactor/reservations-gi/data/restaurants.csv' DELIMITER ',' CSV HEADER;
--- copy reservations(id,restaurantid,userid,date,time,partySize,createdOn) from '/Users/gregoryinouye/Hack Reactor/reservations-gi/data/reservations.csv' DELIMITER ',' CSV HEADER;
+copy restaurants(id,name,capacity) from '/Users/gregoryinouye/Hack Reactor/reservations-gi/data/restaurants.csv' DELIMITER ',' CSV HEADER;
+copy reservations(id,restaurantid,userid,date,time,partySize,createdOn) from '/Users/gregoryinouye/Hack Reactor/reservations-gi/data/reservations.csv' DELIMITER ',' CSV HEADER;

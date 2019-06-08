@@ -37,11 +37,16 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 npm run seed
 - To check 'reservations' database: select * from restaurants;
 
-### Seeding Database for SDC
+### Seeding Postgres Database for SDC
 - ensure Postgres is running
 - psql -d opentable -a -f schema.sql
 
-- copy restaurants(id,name) from 'filepath' delimiter ',' CSV HEADER;
+- copy users(id,username,firstname,lastname,email) from 'FILEPATH' DELIMITER ',' CSV HEADER;
+- copy restaurants(id,name,capacity) from 'FILEPATH' DELIMITER ',' CSV HEADER;
+- copy reservations(id,restaurantid,userid,date,time,partySize,createdOn) from 'FILEPATH' DELIMITER ',' CSV HEADER;
+
+### Seeding Cassandra Database for SDC
+- cqlsh -f schema.cql
 
 ## Usage
 

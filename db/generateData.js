@@ -9,9 +9,9 @@ const reservationTimes = [ '6:00 PM', '6:15 PM', '6:30 PM', '6:45 PM', '7:00 PM'
 async function generateReservationData() {
   const writeStream = fs.createWriteStream('data.csv', {flags: 'a'});
   const start = new Date();
-  let reservationId = -1;
+  let reservationId = 0;
   writeStream.write('id,restaurantId,userId,date,time,partySize,createdOn\n');
-  for (let i = 0; i < 1000000; i += 1) {
+  for (let i = 1; i <= 10000000; i += 1) {
     let count = randomNum(10, 15);
     for (let j = 0; j < count; j += 1) {
       reservationId += 1;
@@ -33,7 +33,7 @@ async function generateUserData() {
   const start = new Date();
   const writeUserStream = fs.createWriteStream('userData.csv', {flags: 'a'});
   writeUserStream.write('id,username,firstname,lastname,email\n');
-  for (let i = 0; i < 10000; i += 1) {
+  for (let i = 1; i <= 10000; i += 1) {
     if (!writeUserStream.write(`${i},${faker.internet.userName()},${faker.name.firstName()},${faker.name.lastName()},${faker.internet.email()}\n`)) {
       await new Promise(resolve => writeUserStream.once('drain', resolve));
     }
@@ -50,7 +50,7 @@ async function generateUserData() {
 async function generateRestaurantData() {
   const start = new Date();
   const names = [];
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 1; i <= 1000; i++) {
     names.push(faker.lorem.word());
   }
   const writeRestaurantStream = fs.createWriteStream('restaurantData.csv', {flags: 'a'});
@@ -68,6 +68,33 @@ async function generateRestaurantData() {
 };
 
 // generateRestaurantData();
+
+async function generateCassandraReservationsByReservationsData() {
+  const writeStream = fs.createWriteStream('cassandraReservationsByReservations.csv', {flags: 'a'});
+  const start = new Date();
+  const users = [];
+  for (let i = 1; i <= 10000; i += 1) {
+    users.push(`${i},${faker.internet.userName()},${faker.name.firstName()},${faker.name.lastName()},${faker.internet.email()}`);
+  }
+  let reservationId = 0;
+  writeStream.write('restaurantId,reservationId,restaurantName,restaurantCapacity,userId,username,firstname,lastname,email,date,time,partySize,createdOn\n');
+  for (let i = 1; i <= 10000000; i += 1) {
+    let count = randomNum(10, 15);
+    for (let j = 0; j < count; j += 1) {
+      reservationId += 1;
+      if (!writeStream.write(`${i},${reservationId},${faker.lorem.word()},${randomNum(8,24)},${users[randomNum(0,9999)]},${'2019-06-' + ('' + randomNum(4, 30)).padStart(2, '0')},${reservationTimes[randomNum(0, 12)]},${randomNum(1, 6)},${'2019-06-' + ['04', '05', '06'][randomNum(0, 2)]}\n`)) {
+        await new Promise(resolve => writeStream.once('drain', resolve));
+      }
+    }
+  }
+
+  writeStream.end(() => {
+    let end = new Date();
+    console.log(`Cassandra reservation data generation completed in ${(end - start)/60000} minutes`)
+  });
+};
+
+generateCassandraReservationsByReservationsData();
 
 // GENERATE DATA WITH CALLBACKS VERSION
 
