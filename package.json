@@ -39,6 +39,7 @@
     "fs": "0.0.1-security",
     "jest": "^24.8.0",
     "jest-css-modules": "^2.0.0",
+    "newrelic": "^5.9.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2"

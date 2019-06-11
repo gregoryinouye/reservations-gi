@@ -30,3 +30,7 @@ package-lock.json
 # DATA FILES
 data
 *.csv
+
+# New Relic
+newrelic.js
+
