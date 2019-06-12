@@ -37,6 +37,6 @@ CREATE TABLE users (
 ALTER TABLE reservations ADD FOREIGN KEY (restaurantId) REFERENCES restaurants (id);
 ALTER TABLE reservations ADD FOREIGN KEY (userId) REFERENCES users (id);
 
-copy users(id,username,firstname,lastname,email) from '/Users/gregoryinouye/Hack Reactor/reservations-gi/data/users.csv' DELIMITER ',' CSV HEADER;
-copy restaurants(id,name,capacity) from '/Users/gregoryinouye/Hack Reactor/reservations-gi/data/restaurants.csv' DELIMITER ',' CSV HEADER;
-copy reservations(id,restaurantid,userid,date,time,partySize,createdOn) from '/Users/gregoryinouye/Hack Reactor/reservations-gi/data/reservations.csv' DELIMITER ',' CSV HEADER;
+copy users(id,username,firstname,lastname,email) from '/Users/gregoryinouye/Hack Reactor/SDC nullTable/reservations-gi/data/users.csv' DELIMITER ',' CSV HEADER;
+copy restaurants(id,name,capacity) from '/Users/gregoryinouye/Hack Reactor/SDC nullTable/reservations-gi/data/restaurants.csv' DELIMITER ',' CSV HEADER;
+copy reservations(id,restaurantid,userid,date,time,partySize,createdOn) from '/Users/gregoryinouye/Hack Reactor/SDC nullTable/reservations-gi/data/reservations.csv' DELIMITER ',' CSV HEADER;

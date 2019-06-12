@@ -44,6 +44,7 @@ npm run seed
 - copy users(id,username,firstname,lastname,email) from 'FILEPATH' DELIMITER ',' CSV HEADER;
 - copy restaurants(id,name,capacity) from 'FILEPATH' DELIMITER ',' CSV HEADER;
 - copy reservations(id,restaurantid,userid,date,time,partySize,createdOn) from 'FILEPATH' DELIMITER ',' CSV HEADER;
+- default index may become out of sync after large import. this can be reset by using the following command: SELECT setval('reservations_id_seq', (SELECT MAX(id) FROM reservations)+1);
 
 ### Seeding Cassandra Database for SDC
 - cqlsh -f schema.cql
@@ -72,19 +73,25 @@ Refer to the [AirBnb Style Guide](https://github.com/airbnb/javascript).
   [
     {
       id: 6,
-      reservationId: 10,
+      restaurantId: 100,
       userId: 55,
       date: '2019-06-10',
       time: '6:00 PM',
-      numSeats: 3,
+      partySize: 1,
+      createdOn: '2019-06-15',
+      name: 'excepturi',
+      capacity: 21,
     },
     {
       id: 6,
-      reservationId: 11,
+      restaurantId: 100,
       userId: 87,
       date: '2019-06-10',
       time: '6:15 PM',
-      numSeats: 4,
+      partySize: 1,
+      createdOn: '2019-06-15',
+      name: 'excepturi',
+      capacity: 21,
     }
   ]
   ```
@@ -100,7 +107,7 @@ Refer to the [AirBnb Style Guide](https://github.com/airbnb/javascript).
     userId: 82,
     date: '2019-06-30',
     time: '6:30 PM',
-    numSeats: 3,
+    partySize: 3,
   }
   ```
 
@@ -112,7 +119,7 @@ Refer to the [AirBnb Style Guide](https://github.com/airbnb/javascript).
 
 - PUT (/:id/reservations/:reservationId)
   
-  Updates the reservation with specified reservationId. The request must be sent with id, userId, date, time, and seat number in req.body.
+  Updates the reservation with specified reservationId. The request must be sent with id, date, time, and party size in req.body.
 
   ```javascript
   {
@@ -121,7 +128,7 @@ Refer to the [AirBnb Style Guide](https://github.com/airbnb/javascript).
     userId: 55,
     date: '2019-06-11',
     time: '7:00 PM',
-    numSeats: 4,
+    partySize: 4,
   }
   ```
   
@@ -133,7 +140,7 @@ Refer to the [AirBnb Style Guide](https://github.com/airbnb/javascript).
     userId: 55,
     date: '2019-06-11',
     time: '7:00 PM',
-    numSeats: 3,
+    partySize: 3,
   }
   ```
 
