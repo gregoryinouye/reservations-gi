@@ -1,8 +1,8 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-// require('newrelic');
 
 const db = require('../db/db.js');
 // const Availability = require('../db/db.js');
@@ -25,7 +25,7 @@ app.get('/:id', (req, res) => {
 });
 
 app.get('/:id/reservations', (req, res) => {
-  const queryText = 'SELECT * FROM restaurants, reservations WHERE reservations.restaurantid = $1 AND restaurants.id = $1';
+  const queryText = 'SELECT reservations.id, restaurants.name, restaurants.capacity, reservations.date, reservations.time, reservations.partysize, reservations.createdon FROM restaurants, reservations WHERE reservations.restaurantid = $1 AND restaurants.id = $1';
   const resID = Number(req.params.id);
 
   // POSTGRES query for SDC project
@@ -55,7 +55,7 @@ app.post('/:id/reservations', (req, res) => {
   const values = [ restaurantid, userId, date, time, partySize, createdOn ];
   db.query(queryText, values, (err, data) => {
     if (err) {
-      console.log(err.stack);
+      console.log(err.stack, userId);
       res.status(404).send(`unable to POST reservation: ${err}`);
     } else {
       res.status(200).send({ reservationId: data.rows[0].id });

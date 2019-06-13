@@ -1,7 +1,7 @@
 // const Sequelize = require('sequelize');
-const { Client } = require('pg');
+const { Pool } = require('pg');
 
-const client = new Client({
+const pool = new Pool({
   user: '',
   host: 'localhost',
   database: 'opentable',
@@ -9,13 +9,13 @@ const client = new Client({
   port: 5432,
 });
 
-client.connect((err) => {
-  if (err) {
-    console.error('Unable to connect to the database:', err);
-  } else {
-    console.log('PostgreSQL db connection has been established successfully.');
-  }
-});
+// client.connect((err) => {
+//   if (err) {
+//     console.error('Unable to connect to the database:', err);
+//   } else {
+//     console.log('PostgreSQL db connection has been established successfully.');
+//   }
+// });
 
 // SEQUELIZE DATABASE CONNECTION FOR FEC PROJECT
 // change user: 'root' and password: 'password' with your credentials
@@ -82,4 +82,4 @@ client.connect((err) => {
 // 
 // module.exports = Availability;
 
-module.exports = client;
+module.exports = pool;

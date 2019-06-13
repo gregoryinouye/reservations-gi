@@ -6,6 +6,7 @@
   "scripts": {
     "build-dev": "webpack -d -w",
     "start-dev": "nodemon server/connection.js",
+    "pm2": "pm2 start -i 0 server/connection.js --node-args='--max-old-space-size=8192'",
     "build": "webpack -d",
     "start": "node server/connection.js",
     "seed": "node db/seed.js",
@@ -47,6 +48,7 @@
   "dependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
+    "@newrelic/native-metrics": "^4.1.0",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
