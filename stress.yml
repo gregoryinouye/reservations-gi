@@ -2,7 +2,7 @@ config:
   target: "http://localhost:3020"
   phases:
     - duration: 30
-      arrivalRate: 800
+      arrivalRate: 1100
   defaults:
     headers:
       x-my-service-auth: "0"
@@ -71,4 +71,13 @@ scenarios:
               time: "{{ time }}"
               partySize: "{{ $randomNumber(1, 6) }}"
               createdOn: "{{ createdOn }}"
+        count: 10
+  - name: "GET reservations for a rare restaurant"
+    weight: 1
+    flow:
+      - loop:
+        - get:
+            url: "/{{ $randomNumber(1, 9000000) }}"
+        - get:
+            url: "/{{ $randomNumber(1, 9000000) }}/reservations"
         count: 10
