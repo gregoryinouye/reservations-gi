@@ -1,11 +1,12 @@
 // const Sequelize = require('sequelize');
 const { Pool } = require('pg');
+const { password } = require('./password.js');
 
 const pool = new Pool({
   user: '',
-  host: 'localhost',
+  host: 'http://52.53.160.227',
   database: 'opentable',
-  password: '',
+  password: password,
   port: 5432,
 });
 
