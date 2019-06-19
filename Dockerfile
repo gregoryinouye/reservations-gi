@@ -12,7 +12,6 @@ RUN npm install --production
 RUN npm install webpack -g
 RUN npm install webpack-cli -g
 
-EXPOSE 3020
-EXPOSE 6379
+EXPOSE 80
 
 CMD [ "npm", "run", "dockerize" ]

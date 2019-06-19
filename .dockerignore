@@ -8,3 +8,4 @@ package-lock.json
 schema.cql
 stress.yml
 data
+.env

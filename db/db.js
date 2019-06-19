@@ -3,9 +3,9 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   user: 'pguser',
-  host: 'localhost',
+  host: process.env.DB_DNS,
   database: 'opentable',
-  password: '',
+  password: process.env.DB_PASSWORD,
   port: 5432,
 });
 

@@ -34,3 +34,5 @@ data
 # New Relic
 newrelic.js
 
+# env
+.env
