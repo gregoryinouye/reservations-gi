@@ -3,8 +3,8 @@ const { Pool } = require('pg');
 const { password } = require('./password.js');
 
 const pool = new Pool({
-  user: '',
-  host: 'http://52.53.160.227',
+  user: 'pguser',
+  host: 'ec2-52-53-160-227.us-west-1.compute.amazonaws.com',
   database: 'opentable',
   password: password,
   port: 5432,
