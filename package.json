@@ -11,7 +11,7 @@
     "start": "node server/connection.js",
     "seed": "node db/seed.js",
     "test": "jest",
-    "dockerize": "webpack -p && node ./server/connection.js"
+    "dockerize": "webpack -p && pm2-runtime ./server/connection.js --w"
   },
   "repository": {
     "type": "git",
